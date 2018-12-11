@@ -25,8 +25,6 @@ const nfdHelper = new NFDHelper();
 // 监听配置文件重指定的网络接口到来的IPv4包
 new PcapHelper(config.dev)
     .on('packet', (packet, raw_packet) => {
-        console.log(raw_packet.buf);
-        console.log(raw_packet.buf instanceof Buffer);
         console.log(packet.payload.payload.saddr + ' -> ' + packet.payload.payload.daddr);
 
         const sourceIp = packet.payload.payload.saddr;
