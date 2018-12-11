@@ -1,0 +1,18 @@
+{
+  "name": "ip-ndn-stack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pcap": "^2.1.0",
+    "protobufjs": "^5.0.1",
+    "raw-socket": "^1.6.4",
+    "sqlite3": "^4.0.4",
+    "uuid": "^3.3.2"
+  }
+}
