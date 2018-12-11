@@ -1,4 +1,5 @@
 {
   "dev": "enp2s0f0",
-  "registerIp": ["192.169.1.1"]
+  "registerIp": ["192.169.1.1"],
+  "filter": "ether proto \\ip && ether dst host a0:36:9f:85:bc:8c"
 }
