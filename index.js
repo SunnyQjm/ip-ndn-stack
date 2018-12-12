@@ -36,6 +36,8 @@ new PcapHelper(config.dev, config.filter)
         // 先将IP包缓存到内存当中
         ipPacketCache[uid] = raw_packet;
 
+        console.log(raw_packet.buf.length);
+        console.log(typeof raw_packet);
         // 发送一个预请求Interest，提醒一个可以到达目的主机的边界网关过来拉取IP包
         nfdHelper.expressInterest(name, () => {
             console.log(`收到对pre request -> ${name} 的空回复`);
