@@ -56,17 +56,10 @@ config.registerIp.forEach(ip => {
             nfdHelper.echoEmpty(interest);
 
             const name = interest.getName().toUri();
-            console.log(name);
-            console.log(name.split('/'));
-            console.log(name.substring(prePrefix.length, name.length))
-            console.log(name.substring(prePrefix.length, name.length).split('/'));
-            let components = prefix.getName()
-                .substring(prePrefix.length, interest.getName().toUri().length).split('/');
-            console.log(components);
-            console.log(prefix.getName());
+            console.log(`收到Interest <- ${name}`);
+            let components = name.substring(prePrefix.length, name.length).split('/');
             let destIp = components[0];
             let sourceIp = components[1];
-
             // 接着构造新的请求来拉取IP包
             nfdHelper.expressInterest(`${getDataPrefix}${sourceIp}/${destIp}/${uuid()}`, (interest, data) => {
                 // 成功拉取到数据包，在此处理IP包的转发
