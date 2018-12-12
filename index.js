@@ -87,7 +87,7 @@ config.registerIp.forEach(ip => {
                 console.log(`缓存中没有: ${sourceIp} -> ${destIp}, uuid = ${uid} 的数据包`);
                 return;
             }
-            data.setContent(ipPacketCache[uid]);
+            data.setContent(ipPacketCache[uid].buf);
             delete ipPacketCache[uid];
             nfdHelper.keyChain.sign(data);
             try {
