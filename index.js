@@ -52,6 +52,7 @@ config.registerIp.forEach(ip => {
      */
     nfdHelper
         .register(`${prePrefix}${ip}`, (prefix, interest, face, interestFilterId, filter) => {        //onInterest
+            console.log('md?');
             // 先对预请求响应一个空回复
             nfdHelper.echoEmpty(interest);
 
@@ -83,6 +84,7 @@ config.registerIp.forEach(ip => {
      */
     nfdHelper
         .register(`/IP/${ip}`, (prefix, interest, face, interestFilterId, filter) => {        //onInterest
+            console.log('md?');
             console.log(`prefix -> ${JSON.stringify(prefix)}`);
             console.log(`interest ->`);
             console.log(interest.getName().toUri());
