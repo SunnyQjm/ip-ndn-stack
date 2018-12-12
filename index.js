@@ -60,8 +60,9 @@ config.registerIp.forEach(ip => {
             let components = name.substring(prePrefix.length, name.length).split('/');
             let destIp = components[0];
             let sourceIp = components[1];
+            let uid = components[2];
             // 接着构造新的请求来拉取IP包
-            nfdHelper.expressInterest(`${getDataPrefix}${sourceIp}/${destIp}/${uuid()}`, (interest, data) => {
+            nfdHelper.expressInterest(`${getDataPrefix}${sourceIp}/${destIp}/${uid}`, (interest, data) => {
                 // 成功拉取到数据包，在此处理IP包的转发
                 console.log('成功拉取到数据包，开始处理数据包转发');
             })
@@ -72,19 +73,12 @@ config.registerIp.forEach(ip => {
      */
     nfdHelper
         .register(`/IP/${ip}`, (prefix, interest, face, interestFilterId, filter) => {        //onInterest
-            console.log('md?');
-            console.log(`prefix -> ${JSON.stringify(prefix)}`);
-            console.log(`interest ->`);
-            console.log(interest.getName().toUri());
-            console.log(interest.getMaxSuffixComponents());
-            console.log(interest.getMinSuffixComponents());
-            console.log(`face -> ${face}`);
-            console.log(`interestFilterId -> ${interestFilterId}`);
-            console.log(`filter -> ${filter}`);
+
+            const name = interest.getName();
 
             const data = new Data(interest.getName());
-            let components = prefix.getName()
-                .substring(prePrefix.length, interest.getName().length).split('/');
+            let components = name.toUri()
+                .substring(prePrefix.length, name.toUri().length).split('/');
             let uid = components[2];
             let destIp = components[1];
             let sourceIp = components[0];
