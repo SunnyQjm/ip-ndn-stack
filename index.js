@@ -64,7 +64,9 @@ config.registerIp.forEach(ip => {
             nfdHelper.expressInterest(`${getDataPrefix}${sourceIp}/${destIp}/${uid}`, (interest, data) => {
                 // 成功拉取到数据包，在此处理IP包的转发
                 console.log('成功拉取到数据包，开始处理数据包转发');
-                console.log(data.getContent());
+                console.log(data.getContent().buffer.length);
+                const packet = PcapHelper.decodeEtherPacket(data.getContent().buffer);
+                console.log(packet);
             })
         });
 

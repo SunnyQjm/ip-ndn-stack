@@ -1,4 +1,7 @@
 const pcap = require('pcap');
+const {
+    EthernetPacket
+} = require('../node_modules/pcap/decode');
 
 class PcapHelper {
     /**
@@ -15,6 +18,10 @@ class PcapHelper {
             const packet = pcap.decode.packet(raw_packet);
             callback(packet, raw_packet);
         });
+    }
+
+    static decodeEtherPacket(raw_packet, emitter) {
+        return EthernetPacket(emitter).decode(raw_packet, 0)
     }
 }
 
