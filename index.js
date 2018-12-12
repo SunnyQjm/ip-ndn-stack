@@ -64,7 +64,7 @@ config.registerIp.forEach(ip => {
             nfdHelper.expressInterest(`${getDataPrefix}${sourceIp}/${destIp}/${uid}`, (interest, data) => {
                 // 成功拉取到数据包，在此处理IP包的转发
                 console.log('成功拉取到数据包，开始处理数据包转发');
-                console.log(data);
+                console.log(data.getContent());
             })
         });
 
