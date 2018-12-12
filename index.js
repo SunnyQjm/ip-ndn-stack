@@ -86,12 +86,12 @@ config.registerIp.forEach(ip => {
                 console.log(`缓存中没有: ${sourceIp} -> ${destIp}, uuid = ${uid} 的数据包`);
                 return;
             }
-            data.setContent(ipPacketCache[uid].buf);
+            data.setContent('what');
             delete ipPacketCache[uid];
             nfdHelper.keyChain.sign(data);
             // console.log(`maxNdnPacketSize: ${nfdHelper.face.getMaxNdnPacketSize()}`);
             try {
-                face.putData('what?');
+                face.putData(data);
             } catch (e) {
                 console.error(e);
             }
