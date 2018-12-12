@@ -55,6 +55,8 @@ config.registerIp.forEach(ip => {
 
             let components = prefix.getName()
                 .substring(prePrefix.length, prefix.getName().length).split('/');
+            console.log(components);
+            console.log(prefix.getName());
             let destIp = components[0];
             let sourceIp = components[1];
 
