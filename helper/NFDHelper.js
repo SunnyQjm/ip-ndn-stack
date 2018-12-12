@@ -182,6 +182,7 @@ class NFDHelper {
      * @param onError
      */
     expressInterest(nameOrInterest, onData = () => {}, onError = (e) => {console.log('error')}) {
+        console.log(`express interest -> ${nameOrInterest}`);
         this.face.expressInterest(nameOrInterest, onData, onError);
     }
 
