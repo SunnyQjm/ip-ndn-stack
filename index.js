@@ -52,21 +52,13 @@ config.registerIp.forEach(ip => {
      */
     nfdHelper
         .register(`${prePrefix}${ip}`, (prefix, interest, face, interestFilterId, filter) => {        //onInterest
-            console.log('md?');
             // 先对预请求响应一个空回复
             nfdHelper.echoEmpty(interest);
 
-            console.log(`prefix -> ${JSON.stringify(prefix)}`);
-            console.log(`interest ->`);
             console.log(interest.getName().toUri());
-            console.log(interest.getMaxSuffixComponents());
-            console.log(interest.getMinSuffixComponents());
-            console.log(`face -> ${face}`);
-            console.log(`interestFilterId -> ${interestFilterId}`);
-            console.log(`filter -> ${filter}`);
 
             let components = prefix.getName()
-                .substring(prePrefix.length, prefix.getName().length).split('/');
+                .substring(prePrefix.length, prefix.getName().toUri().length).split('/');
             console.log(components);
             console.log(prefix.getName());
             let destIp = components[0];
