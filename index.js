@@ -55,8 +55,11 @@ config.registerIp.forEach(ip => {
             // 先对预请求响应一个空回复
             nfdHelper.echoEmpty(interest);
 
-            console.log(interest.getName().toUri());
-
+            const name = interest.getName().toUri();
+            console.log(name);
+            console.log(name.split('/'));
+            console.log(name.substring(prePrefix.length, name.length))
+            console.log(name.substring(prePrefix.length, name.length).split('/'));
             let components = prefix.getName()
                 .substring(prePrefix.length, interest.getName().toUri().length).split('/');
             console.log(components);
