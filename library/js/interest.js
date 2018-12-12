@@ -255,7 +255,7 @@ Interest.prototype.clone = function()
  * Get the interest Name.
  * @return {Name} The name.  The name size() may be 0 if not specified.
  */
-Interest.prototype.getName = function() { return this.name_.get(); };
+  Interest.prototype.getName = function() { return this.name_.get(); };
 
 /**
  * Get the min suffix components.

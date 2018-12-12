@@ -38,12 +38,27 @@ new PcapHelper(config.dev, config.filter)
         ipPacketCache[uid] = raw_packet;
 
         // 发送一个预请求Interest，提醒一个可以到达目的主机的边界网关过来拉取IP包
-        nfdHelper.expressInterest(name)
+        nfdHelper.expressInterest(name, () => {
+            console.log(`收到对pre request -> ${name} 的空回复`);
+        })
     });
 
 config.registerIp.forEach(ip => {
 
     console.log(`deal ${ip}`);
+
+    nfdHelper
+        .register(`/a/ping`, (prefix, interest, face, interestFilterId, filter) => {
+            console.log(`prefix -> ${JSON.stringify(prefix)}`);
+            console.log(`interest ->`);
+            console.log(interest.getName().toUri());
+            console.log(interest.getMaxSuffixComponents());
+            console.log(interest.getMinSuffixComponents());
+            console.log(`face -> ${face}`);
+            console.log(`interestFilterId -> ${interestFilterId}`);
+            console.log(`filter -> ${filter}`);
+            nfdHelper.echoEmpty(interest);
+        });
 
     /**
      * 注册监听pre请求
