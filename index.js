@@ -1,7 +1,6 @@
 const {
     Data,
-    Name,
-    Interest
+    WireFormat
 } = require('./library');
 const {
     NFDHelper,
@@ -90,8 +89,10 @@ config.registerIp.forEach(ip => {
             data.setContent(ipPacketCache[uid].buf);
             delete ipPacketCache[uid];
             nfdHelper.keyChain.sign(data);
+            console.log(`maxNdnPacketSize: ${face.getMaxNdnPacketSize()}`);
+            console.log(`encode data size: ${data.encode(WireFormat.getDefaultWireFormat())}`);
             try {
-                face.putData(data);
+                face.putData('what?');
             } catch (e) {
                 console.error(e);
             }
