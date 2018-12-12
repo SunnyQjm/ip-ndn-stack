@@ -69,6 +69,15 @@ config.registerIp.forEach(ip => {
             // 先对预请求响应一个空回复
             nfdHelper.echoEmpty(interest);
 
+            console.log(`prefix -> ${JSON.stringify(prefix)}`);
+            console.log(`interest ->`);
+            console.log(interest.getName().toUri());
+            console.log(interest.getMaxSuffixComponents());
+            console.log(interest.getMinSuffixComponents());
+            console.log(`face -> ${face}`);
+            console.log(`interestFilterId -> ${interestFilterId}`);
+            console.log(`filter -> ${filter}`);
+
             let components = prefix.getName()
                 .substring(prePrefix.length, prefix.getName().length).split('/');
             console.log(components);
