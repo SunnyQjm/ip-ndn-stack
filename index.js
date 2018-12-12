@@ -58,7 +58,7 @@ config.registerIp.forEach(ip => {
             console.log(interest.getName().toUri());
 
             let components = prefix.getName()
-                .substring(prePrefix.length, prefix.getName().toUri().length).split('/');
+                .substring(prePrefix.length, interest.getName().toUri().length).split('/');
             console.log(components);
             console.log(prefix.getName());
             let destIp = components[0];
@@ -88,7 +88,7 @@ config.registerIp.forEach(ip => {
 
             const data = new Data(interest.getName());
             let components = prefix.getName()
-                .substring(prePrefix.length, prefix.getName().length).split('/');
+                .substring(prePrefix.length, interest.getName().length).split('/');
             let uid = components[2];
             let destIp = components[1];
             let sourceIp = components[0];
