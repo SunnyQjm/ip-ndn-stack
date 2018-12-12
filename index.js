@@ -90,7 +90,6 @@ config.registerIp.forEach(ip => {
             delete ipPacketCache[uid];
             nfdHelper.keyChain.sign(data);
             // console.log(`maxNdnPacketSize: ${nfdHelper.face.getMaxNdnPacketSize()}`);
-            console.log(`encode data size: ${data.wireDecode(WireFormat.getDefaultWireFormat())}`);
             try {
                 face.putData('what?');
             } catch (e) {
