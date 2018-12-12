@@ -21,7 +21,7 @@ class PcapHelper {
     }
 
     static decodeEtherPacket(raw_packet, emitter) {
-        return EthernetPacket(emitter).decode(raw_packet, 0)
+        return new EthernetPacket(emitter).decode(raw_packet, 0)
     }
 }
 
