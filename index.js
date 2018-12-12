@@ -50,6 +50,7 @@ config.registerIp.forEach(ip => {
      */
     nfdHelper
         .register(`${prePrefix}${ip}`, (prefix, interest, face, interestFilterId, filter) => {        //onInterest
+            console.log(prefix);
             // 先对预请求响应一个空回复
             nfdHelper.echoEmpty(interest);
 
