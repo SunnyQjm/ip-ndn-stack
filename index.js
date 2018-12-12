@@ -47,25 +47,11 @@ config.registerIp.forEach(ip => {
 
     console.log(`deal ${ip}`);
 
-    nfdHelper
-        .register(`/a/ping`, (prefix, interest, face, interestFilterId, filter) => {
-            console.log(`prefix -> ${JSON.stringify(prefix)}`);
-            console.log(`interest ->`);
-            console.log(interest.getName().toUri());
-            console.log(interest.getMaxSuffixComponents());
-            console.log(interest.getMinSuffixComponents());
-            console.log(`face -> ${face}`);
-            console.log(`interestFilterId -> ${interestFilterId}`);
-            console.log(`filter -> ${filter}`);
-            nfdHelper.echoEmpty(interest);
-        });
-
     /**
      * 注册监听pre请求
      */
     nfdHelper
         .register(`${prePrefix}${ip}`, (prefix, interest, face, interestFilterId, filter) => {        //onInterest
-            console.log(prefix);
             // 先对预请求响应一个空回复
             nfdHelper.echoEmpty(interest);
 
@@ -97,6 +83,15 @@ config.registerIp.forEach(ip => {
      */
     nfdHelper
         .register(`/IP/${ip}`, (prefix, interest, face, interestFilterId, filter) => {        //onInterest
+            console.log(`prefix -> ${JSON.stringify(prefix)}`);
+            console.log(`interest ->`);
+            console.log(interest.getName().toUri());
+            console.log(interest.getMaxSuffixComponents());
+            console.log(interest.getMinSuffixComponents());
+            console.log(`face -> ${face}`);
+            console.log(`interestFilterId -> ${interestFilterId}`);
+            console.log(`filter -> ${filter}`);
+
             const data = new Data(interest.getName());
             let components = prefix.getName()
                 .substring(prePrefix.length, prefix.getName().length).split('/');
