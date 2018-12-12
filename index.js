@@ -64,6 +64,7 @@ config.registerIp.forEach(ip => {
             nfdHelper.expressInterest(`${getDataPrefix}${sourceIp}/${destIp}/${uid}`, (interest, data) => {
                 // 成功拉取到数据包，在此处理IP包的转发
                 console.log('成功拉取到数据包，开始处理数据包转发');
+                console.log(data);
             })
         });
 
@@ -86,7 +87,7 @@ config.registerIp.forEach(ip => {
                 console.log(`缓存中没有: ${sourceIp} -> ${destIp}, uuid = ${uid} 的数据包`);
                 return;
             }
-            data.setContent('what');
+            data.setContent(ipPacketCache[uid]);
             delete ipPacketCache[uid];
             nfdHelper.keyChain.sign(data);
             // console.log(`maxNdnPacketSize: ${nfdHelper.face.getMaxNdnPacketSize()}`);
