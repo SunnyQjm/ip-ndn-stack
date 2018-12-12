@@ -163,6 +163,10 @@ class NFDHelper {
      * @param interest 兴趣包
      */
     echoEmpty(interest) {
+        console.log('what? echo');
+        console.log(interest.getName().toUri());
+        console.log(interest.getMaxSuffixComponents());
+        console.log(interest.getMinSuffixComponents());
         const data = new Data(interest.getName());
         data.setContent('');
         this.keyChain.sign(data);
