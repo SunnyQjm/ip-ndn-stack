@@ -4,7 +4,8 @@ const {
 } = require('./library');
 const {
     NFDHelper,
-    PcapHelper
+    PcapHelper,
+    RawSocketHelper
 } = require('./helper');
 const fs = require('fs');
 const uuid = require('uuid');
@@ -20,6 +21,7 @@ const getDataPrefix = '/IP/';
 const ipPacketCache = {};
 
 const nfdHelper = new NFDHelper();
+const rawSocketHelper = new RawSocketHelper();
 
 // 监听配置文件重指定的网络接口到来的IPv4包
 new PcapHelper(config.dev, config.filter)
@@ -67,6 +69,7 @@ config.registerIp.forEach(ip => {
                 console.log(data.getContent().buffer.length);
                 const packet = PcapHelper.decodeIPv4Packet(data.getContent().buffer);
                 console.log(packet);
+                rawSocketHelper.rawSend(data.getContent().buffer, 0, data.getContent().buffer.length);
             })
         });
 
