@@ -68,12 +68,11 @@ config.registerIp.forEach(ip => {
                 console.log('成功拉取到数据包，开始处理数据包转发');
                 console.log(data.getContent().buffer.length);
                 const packet = PcapHelper.decodeIPv4Packet(data.getContent().buffer);
-                console.log(packet);
                 rawSocketHelper.rawSend(data.getContent().buffer, 0, data.getContent().buffer.length, function (error, bytes) {
                     if (error) {
                         console.log (error.toString ());
                     } else {
-                        console.log ("sent " + bytes + " bytes to " + target);
+                        console.log ("sent " + bytes + " bytes to " + packet.daddr);
                     }
                 });
             })
