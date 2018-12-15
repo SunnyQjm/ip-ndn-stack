@@ -42,13 +42,7 @@ class RawSocketHelper{
      * @param length
      * @param callback
      */
-    rawSend(buffer, start = 0, length = buffer.length, callback = (error, bytes) => {
-        if (error) {
-            console.log (error.toString ());
-        } else {
-            console.log ("sent " + bytes + " bytes to " + target);
-        }
-    }) {
+    rawSend(buffer, start = 0, length = buffer.length, callback) {
         this.socket.send(buffer, start, length, callback);
     }
 }
