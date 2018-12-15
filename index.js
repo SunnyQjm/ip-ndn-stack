@@ -48,6 +48,7 @@ new PcapHelper(config.dev, config.filter)
 new PcapHelper(config.dev, config.arpFilter)
     .on('packet', (packet, raw_packet) => {
         console.log('======================ARP=====================');
+        console.log(packet.payload.shost + ' -> ' + packet.payload.dhost);
         console.log(packet);
         console.log('==============================================');
     });
