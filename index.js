@@ -81,6 +81,7 @@ config.registerIp.forEach(ip => {
                 // console.log(data.getContent().buffer.length);
                 // const packet = PcapHelper.decodeIPv4Packet(data.getContent().buffer);
                 let endTime = new Date().valueOf();
+                console.log(timeCalcute[uid] + '->' + endTime);
                 console.log(endTime - timeCalcute[uid]);
                 rawSocketHelper.rawSend(data.getContent().buffer, 0, data.getContent().buffer.length, destIp, function (error, bytes) {
                     if (error) {
