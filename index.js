@@ -39,7 +39,7 @@ new PcapHelper(config.dev, config.filter)
 
         // 先将IP包缓存到内存当中
         ipPacketCache[uid] = raw_packet.buf.slice(14, packet.pcap_header.len);
-        timeCalcute[uid] = Data.now().valueOf();
+        timeCalcute[uid] = new Date().valueOf();
 
         // 发送一个预请求Interest，提醒一个可以到达目的主机的边界网关过来拉取IP包
         nfdHelper.expressInterest(name, () => {
@@ -80,7 +80,7 @@ config.registerIp.forEach(ip => {
                 // console.log('成功拉取到数据包，开始处理数据包转发');
                 // console.log(data.getContent().buffer.length);
                 // const packet = PcapHelper.decodeIPv4Packet(data.getContent().buffer);
-                let endTime = Data.now().valueOf();
+                let endTime = new Date().valueOf();
                 console.log(endTime - timeCalcute[uid]);
                 rawSocketHelper.rawSend(data.getContent().buffer, 0, data.getContent().buffer.length, destIp, function (error, bytes) {
                     if (error) {
