@@ -44,14 +44,14 @@ new PcapHelper(config.dev, config.filter)
         })
     });
 
-//抓取并响应ARP包
-new PcapHelper(config.dev, config.arpFilter)
-    .on('packet', (packet, raw_packet) => {
-        console.log('======================ARP=====================');
-        console.log(packet.payload.shost + ' -> ' + packet.payload.dhost);
-        console.log(packet);
-        console.log('==============================================');
-    });
+// //抓取并响应ARP包
+// new PcapHelper(config.dev, config.arpFilter)
+//     .on('packet', (packet, raw_packet) => {
+//         console.log('======================ARP=====================');
+//         console.log(packet.payload.shost + ' -> ' + packet.payload.dhost);
+//         console.log(packet);
+//         console.log('==============================================');
+//     });
 
 config.registerIp.forEach(ip => {
 
