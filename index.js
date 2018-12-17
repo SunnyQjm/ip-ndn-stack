@@ -112,6 +112,7 @@ config.registerIp.forEach(ip => {
             }
             let endTime = new Date().valueOf();
             console.log(timeCalcute[uid] + '->' + endTime);
+            console.log(timeCalcute[uid] - endTime);
             data.setContent(ipPacketCache[uid]);
             delete ipPacketCache[uid];
             nfdHelper.keyChain.sign(data);
