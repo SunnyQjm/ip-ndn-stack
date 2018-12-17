@@ -76,7 +76,7 @@ config.registerIp.forEach(ip => {
                 // 成功拉取到数据包，在此处理IP包的转发
                 // console.log('成功拉取到数据包，开始处理数据包转发');
                 // console.log(data.getContent().buffer.length);
-                const packet = PcapHelper.decodeIPv4Packet(data.getContent().buffer);
+                // const packet = PcapHelper.decodeIPv4Packet(data.getContent().buffer);
                 rawSocketHelper.rawSend(data.getContent().buffer, 0, data.getContent().buffer.length, destIp, function (error, bytes) {
                     if (error) {
                         console.log (error.toString ());
