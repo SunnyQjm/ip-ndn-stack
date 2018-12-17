@@ -42,8 +42,8 @@ class RawSocketHelper{
      * @param length
      * @param callback
      */
-    rawSend(buffer, start = 0, length = buffer.length, callback) {
-        this.socket.send(buffer, start, length, '192.169.1.4', callback);
+    rawSend(buffer, start = 0, length = buffer.length, address, callback) {
+        this.socket.send(buffer, start, length, address, callback);
     }
 }
 
