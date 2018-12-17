@@ -66,7 +66,7 @@ config.registerIp.forEach(ip => {
             nfdHelper.echoEmpty(interest);
 
             const name = interest.getName().toUri();
-            console.log(`收到Interest <- ${name}`);
+            // console.log(`收到Interest <- ${name}`);
             let components = name.substring(prePrefix.length, name.length).split('/');
             let destIp = components[0];
             let sourceIp = components[1];
