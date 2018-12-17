@@ -26,7 +26,7 @@ const rawSocketHelper = new RawSocketHelper();
 // 监听配置文件重指定的网络接口到来的IPv4包
 new PcapHelper(config.dev, config.filter)
     .on('packet', (packet, raw_packet) => {
-        console.log(packet.payload.payload.saddr + ' -> ' + packet.payload.payload.daddr);
+        // console.log(packet.payload.payload.saddr + ' -> ' + packet.payload.payload.daddr);
 
         const sourceIp = packet.payload.payload.saddr;
         const destIp = packet.payload.payload.daddr;
@@ -40,7 +40,7 @@ new PcapHelper(config.dev, config.filter)
 
         // 发送一个预请求Interest，提醒一个可以到达目的主机的边界网关过来拉取IP包
         nfdHelper.expressInterest(name, () => {
-            console.log(`收到对pre request -> ${name} 的空回复`);
+            // console.log(`收到对pre request -> ${name} 的空回复`);
         })
     });
 
@@ -55,7 +55,7 @@ new PcapHelper(config.dev, config.filter)
 
 config.registerIp.forEach(ip => {
 
-    console.log(`deal ${ip}`);
+    // console.log(`deal ${ip}`);
 
     /**
      * 注册监听pre请求
@@ -74,14 +74,14 @@ config.registerIp.forEach(ip => {
             // 接着构造新的请求来拉取IP包
             nfdHelper.expressInterest(`${getDataPrefix}${sourceIp}/${destIp}/${uid}`, (interest, data) => {
                 // 成功拉取到数据包，在此处理IP包的转发
-                console.log('成功拉取到数据包，开始处理数据包转发');
-                console.log(data.getContent().buffer.length);
+                // console.log('成功拉取到数据包，开始处理数据包转发');
+                // console.log(data.getContent().buffer.length);
                 const packet = PcapHelper.decodeIPv4Packet(data.getContent().buffer);
                 rawSocketHelper.rawSend(data.getContent().buffer, 0, data.getContent().buffer.length, destIp, function (error, bytes) {
                     if (error) {
                         console.log (error.toString ());
                     } else {
-                        console.log ("sent " + bytes + " bytes to " + packet.daddr);
+                        // console.log ("sent " + bytes + " bytes to " + packet.daddr);
                     }
                 });
             })
