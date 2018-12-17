@@ -80,9 +80,7 @@ config.registerIp.forEach(ip => {
                 // console.log('成功拉取到数据包，开始处理数据包转发');
                 // console.log(data.getContent().buffer.length);
                 // const packet = PcapHelper.decodeIPv4Packet(data.getContent().buffer);
-                let endTime = new Date().valueOf();
-                console.log(timeCalcute[uid] + '->' + endTime);
-                console.log(endTime - timeCalcute[uid]);
+
                 rawSocketHelper.rawSend(data.getContent().buffer, 0, data.getContent().buffer.length, destIp, function (error, bytes) {
                     if (error) {
                         console.log (error.toString ());
@@ -112,6 +110,8 @@ config.registerIp.forEach(ip => {
                 console.log(`缓存中没有: ${sourceIp} -> ${destIp}, uuid = ${uid} 的数据包`);
                 return;
             }
+            let endTime = new Date().valueOf();
+            console.log(timeCalcute[uid] + '->' + endTime);
             data.setContent(ipPacketCache[uid]);
             delete ipPacketCache[uid];
             nfdHelper.keyChain.sign(data);
