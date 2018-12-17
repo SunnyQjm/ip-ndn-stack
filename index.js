@@ -22,6 +22,8 @@ const ipPacketCache = {};
 
 const timeCalcute = {};
 
+const rawSocketDeplay = {};
+
 const nfdHelper = new NFDHelper();
 const rawSocketHelper = new RawSocketHelper();
 
@@ -33,6 +35,7 @@ new PcapHelper(config.dev, config.filter)
         const sourceIp = packet.payload.payload.saddr;
         const destIp = packet.payload.payload.daddr;
 
+        console.log('raw socket delay: ' + (new Date().valueOf() - rawSocketDeplay[sourceIp] ));
         // 构造一个预请求的Interest名字
         let uid = uuid();              //给某个IP包进行索引
         let name = `${prePrefix}${destIp}/${sourceIp}/${uid}`;
@@ -80,7 +83,7 @@ config.registerIp.forEach(ip => {
                 // console.log('成功拉取到数据包，开始处理数据包转发');
                 // console.log(data.getContent().buffer.length);
                 // const packet = PcapHelper.decodeIPv4Packet(data.getContent().buffer);
-
+                rawSocketDeplay[destIp] = new Date().valueOf();
                 rawSocketHelper.rawSend(data.getContent().buffer, 0, data.getContent().buffer.length, destIp, function (error, bytes) {
                     if (error) {
                         console.log (error.toString ());
