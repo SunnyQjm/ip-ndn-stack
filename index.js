@@ -20,7 +20,6 @@ const getDataPrefix = '/IP/';
 
 const ipPacketCache = {};
 
-const timeCalcute = {};
 
 const rawSocketDeplay = {};
 
@@ -42,7 +41,6 @@ const rawSocketHelper = new RawSocketHelper();
 
         // 先将IP包缓存到内存当中
         ipPacketCache[uid] = raw_packet.buf.slice(14, packet.pcap_header.len);
-        timeCalcute[uid] = new Date().valueOf();
 
         // 发送一个预请求Interest，提醒一个可以到达目的主机的边界网关过来拉取IP包
         nfdHelper.expressInterest(name, () => {
@@ -113,9 +111,6 @@ config.registerIp.forEach(ip => {
                 console.log(`缓存中没有: ${sourceIp} -> ${destIp}, uuid = ${uid} 的数据包`);
                 return;
             }
-            let endTime = new Date().valueOf();
-            console.log(timeCalcute[uid] + '->' + endTime);
-            console.log(endTime - timeCalcute[uid]);
             data.setContent(ipPacketCache[uid]);
             delete ipPacketCache[uid];
             nfdHelper.keyChain.sign(data);
