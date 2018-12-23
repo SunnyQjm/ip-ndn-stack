@@ -28,7 +28,7 @@ const nfdHelper = new NFDHelper();
 const rawSocketHelper = new RawSocketHelper();
 
 // 监听配置文件重指定的网络接口到来的IPv4包
-new PcapHelper(config.dev, config.filter)
+    new PcapHelper(config.dev, config.filter)
     .on('packet', (packet, raw_packet) => {
         // console.log(packet.payload.payload.saddr + ' -> ' + packet.payload.payload.daddr);
 
