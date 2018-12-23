@@ -30,10 +30,11 @@ const rawSocketHelper = new RawSocketHelper();
 // 监听配置文件重指定的网络接口到来的IPv4包
     new PcapHelper(config.dev, config.filter)
     .on('packet', (packet, raw_packet) => {
-        // console.log(packet.payload.payload.saddr + ' -> ' + packet.payload.payload.daddr);
+        console.log(packet.payload.payload.saddr + ' -> ' + packet.payload.payload.daddr);
 
         const sourceIp = packet.payload.payload.saddr;
         const destIp = packet.payload.payload.daddr;
+
 
         // 构造一个预请求的Interest名字
         let uid = uuid();              //给某个IP包进行索引
