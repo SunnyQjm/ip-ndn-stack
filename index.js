@@ -35,7 +35,6 @@ const rawSocketHelper = new RawSocketHelper();
         const sourceIp = packet.payload.payload.saddr;
         const destIp = packet.payload.payload.daddr;
 
-        console.log('raw socket delay: ' + (new Date().valueOf() - rawSocketDeplay[sourceIp] ));
         // 构造一个预请求的Interest名字
         let uid = uuid();              //给某个IP包进行索引
         let name = `${prePrefix}${destIp}/${sourceIp}/${uid}`;
@@ -46,7 +45,7 @@ const rawSocketHelper = new RawSocketHelper();
 
         // 发送一个预请求Interest，提醒一个可以到达目的主机的边界网关过来拉取IP包
         nfdHelper.expressInterest(name, () => {
-            // console.log(`收到对pre request -> ${name} 的空回复`);
+            console.log(`收到对pre request -> ${name} 的空回复`);
         })
     });
 
