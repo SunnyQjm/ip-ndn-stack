@@ -45,7 +45,7 @@ const rawSocketHelper = new RawSocketHelper();
 
         // 发送一个预请求Interest，提醒一个可以到达目的主机的边界网关过来拉取IP包
         nfdHelper.expressInterest(name, () => {
-            console.log(`收到对pre request -> ${name} 的空回复`);
+            // console.log(`收到对pre request -> ${name} 的空回复`);
         })
     });
 
@@ -85,7 +85,7 @@ config.registerIp.forEach(ip => {
                 rawSocketDeplay[destIp] = new Date().valueOf();
                 rawSocketHelper.rawSend(data.getContent().buffer, 0, data.getContent().buffer.length, destIp, function (error, bytes) {
                     if (error) {
-                        console.log (error.toString ());
+                        console.log ("raw socket error: " + error.toString ());
                     } else {
                         // console.log ("sent " + bytes + " bytes to " + packet.daddr);
                     }
